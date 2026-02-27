@@ -19,6 +19,7 @@ To setup this project, take the following steps:
 
 - Then run the `init_dataset.py` file
 
+<<<<<<< HEAD
 - Build embeddings (one-time, slow): `python src/embeddings/build_embeddings.py`
 
 - Build KNN graph (one-time): `python src/knn/build_knn.py`
@@ -59,3 +60,16 @@ fashion_items/               # Downloaded dataset, gitignored
 ├── images/                  # {id}.jpg product photos
 └── styles.csv               # Item metadata (colour, usage, season, etc.)
 ```
+=======
+## General Plan
+
+We plan ao make an AI system that uses Sinulated Annealing (or other local search techniques) to create an outfit from a given article of clothing.
+
+We are using this [Kaggle dataset](https://www.kaggle.com/datasets/paramaggarwal/fashion-product-images-small/versions/1?resource=download). 
+
+The system should be split into the following parts:
+- A data cleaner, which organizes the data from the data set into a format the search and view can work with
+- A search component, which first creates a random outfit with a given article of clothing, then locally searches the outfit space using some outfit huristic
+- A view, which shows the initial and final products, and possibly some states in between
+
+>>>>>>> 168523f6aff78d35b431e94c43a6061db17ee88c
