@@ -1,2 +1,4 @@
 fashion_items/*
 venv/*
+polyvore_dataset/*
+!polyvore_dataset/polyvore.tar.gz
