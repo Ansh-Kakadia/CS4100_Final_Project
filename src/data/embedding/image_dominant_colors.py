@@ -23,13 +23,13 @@ def get_most_dominant_colors(image_id: str, k : int):
     return sorted_colors.astype(int)
     
 
-#Unit test for an item
-def test():
-    result = get_most_dominant_colors("1556", 4)
+#Unit test for most_dominant_colors
+def test_dom_colors():
+    result = get_most_dominant_colors("59925", 4)
     for i, color in enumerate(result):
         r, g, b = color
         swatch = f"\033[48;2;{r};{g};{b}m     \033[0m"  # colored block
         print(f"Color {i+1}: {swatch}  RGB({r}, {g}, {b})")
 
 if __name__ == "__main__":   
-    test()
+    test_dom_colors()
