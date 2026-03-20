@@ -13,7 +13,7 @@ def get_embedding(id: str):
     master_category = row["masterCategory"]
     sub_category = row["subCategory"]
     article_type = row["articleType"]
-    base_colour = row["baseColour"]
+    base_colour = row["baseColour"] # rendered redundant by 
     season = row["season"]
     year = row["year"]
     usage = row["usage"]
