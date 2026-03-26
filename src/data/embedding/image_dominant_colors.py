@@ -1,12 +1,13 @@
+import os
 from PIL import Image
 from rembg import remove
 import numpy as np
 from sklearn.cluster import KMeans
 
 
-def get_most_dominant_colors(image_id: str, k : int):
-    '''returns the top k dominant colors of the article of clothing using k-means clustering''' 
-    img_path = "./fashion_items/images/" + image_id + ".jpg"
+def get_most_dominant_colors(image_id: str, k: int, images_dir: str = "./fashion_items/images"):
+    '''returns the top k dominant colors of the article of clothing using k-means clustering'''
+    img_path = os.path.join(images_dir, image_id + ".jpg")
     
     image = Image.open(img_path)
     image_bg_removed = remove(image)
