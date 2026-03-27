@@ -1,7 +1,7 @@
 import numpy as np
 from tqdm import tqdm
 
-from src.data.embedding.image_dominant_colors import get_most_dominant_colors
+from src.data.image_dominant_colors import get_most_dominant_colors_kaggle
 
 
 class ColorEncoder:
@@ -22,7 +22,7 @@ class ColorEncoder:
 
     def encode(self, item_id: int) -> np.ndarray:
         try:
-            colors = get_most_dominant_colors(str(item_id), self.k, self.images_dir)
+            colors = get_most_dominant_colors_kaggle(str(item_id), self.k)
             # colors: (k, 3) int array, values 0-255
             return colors.flatten().astype(np.float32) / 255.0
         except Exception:

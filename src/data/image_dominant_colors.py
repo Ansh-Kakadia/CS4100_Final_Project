@@ -4,16 +4,8 @@ from rembg import remove
 import numpy as np
 from sklearn.cluster import KMeans
 
-<<<<<<< HEAD:src/data/embedding/image_dominant_colors.py
-
-def get_most_dominant_colors(image_id: str, k: int, images_dir: str = "./fashion_items/images"):
-    '''returns the top k dominant colors of the article of clothing using k-means clustering'''
-    img_path = os.path.join(images_dir, image_id + ".jpg")
-=======
-def get_most_dominant_colors(image: Image.Image, k:int):
+def get_most_dominant_colors(image: Image.Image, k: int):
     '''returns the top k dominant colors of the given clothing image'''
->>>>>>> 31f761996ab1c61dffd362c85faf5483eb0268af:src/data/image_dominant_colors.py
-    
     image_bg_removed = remove(image)
     
     rgba_pixels = np.array(image_bg_removed)
