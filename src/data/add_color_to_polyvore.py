@@ -3,6 +3,7 @@ from PIL import Image
 from io import BytesIO
 import json
 from image_dominant_colors import get_most_dominant_colors
+from tqdm import tqdm
 
 
 def get_image_from_url(url: str):
@@ -16,7 +17,7 @@ def add_color_to_polyvore(file_path):
     with open(file_path) as f:
         data = json.load(f)
 
-    for outfit in data:
+    for outfit in tqdm(data):
         for clothing_item in outfit["items"]:
             try:
                 image = get_image_from_url(clothing_item["image"])
@@ -24,7 +25,7 @@ def add_color_to_polyvore(file_path):
                 clothing_item["dominant_color"] = c1.tolist()
                 clothing_item["secondary_color"] = c2.tolist()
             except Exception as e:
-                print(f"Skipping item in outfit {clothing_item["name"]}: {e}")
+                print(f"Skipping item in outfit {clothing_item['name']}: {e}")
 
         with open(file_path, 'w') as f:
             json.dump(data, f, indent=2)
