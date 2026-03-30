@@ -39,8 +39,8 @@ def add_color_to_polyvore(file_path):
             except Exception as e:
                 print(f"Skipping item in outfit {clothing_item['name']}: {e}")
 
-        with open(file_path, 'w') as f:
-            json.dump(data, f, indent=2)
+    with open(file_path, 'w') as f:
+        json.dump(data, f, indent=2)
         
 if __name__ == "__main__":
     add_color_to_polyvore("polyvore_dataset/valid_no_dup.json")
