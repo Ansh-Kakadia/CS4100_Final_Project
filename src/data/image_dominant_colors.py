@@ -12,7 +12,7 @@ def get_most_dominant_colors(image: Image.Image, k: int):
     filter_transparant = rgba_pixels[:,:,3] > 128
     rgb_pixels = rgba_pixels[filter_transparant][:,:3]
     
-    kmeans = KMeans(k, n_init=10)
+    kmeans = KMeans(n_clusters=k, n_init=3, max_iter=50)
     kmeans.fit(rgb_pixels)
     counts = np.bincount(kmeans.labels_)
     sorted_colors = kmeans.cluster_centers_[np.argsort(-counts)]

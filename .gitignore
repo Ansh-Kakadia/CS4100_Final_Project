@@ -1,3 +1,5 @@
 fashion_items/*
+!fashion_items/styles.json
+
 venv/*
 polyvore_dataset/hf_images/*
