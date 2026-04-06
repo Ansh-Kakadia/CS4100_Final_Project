@@ -5,6 +5,7 @@ from .item import FashionItem
 MIN_SLOT_SIZE = 50
 
 
+
 class FashionDataset:
     def __init__(self, csv_path: str, images_dir: str, gender: str = None):
         df = pd.read_csv(csv_path, on_bad_lines="skip")
@@ -44,7 +45,7 @@ class FashionDataset:
         for item in self.items:
             self.by_slot.setdefault(item.sub_category, []).append(item)
 
-        # Filter out slots that are too small
+        # Filter out undersized slots
         self.by_slot = {
             slot: items
             for slot, items in self.by_slot.items()
