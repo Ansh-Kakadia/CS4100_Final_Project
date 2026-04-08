@@ -26,7 +26,7 @@ def run(
         if t < min:
             break
         
-        candidate = NeighborFinder.get_neighbors(current)
+        candidate = finder.get_neighbors(current)
         candidate_energy = energy.compute(candidate)
         
         delta = candidate_energy - current_energy
