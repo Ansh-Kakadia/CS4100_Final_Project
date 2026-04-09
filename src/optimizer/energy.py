@@ -1,6 +1,8 @@
+import math
+import numpy as np
+
 from src.data.item import FashionItem
 from src.optimizer import color_harmony
-
 
 # TODO: decide with teammates whether dominant_color/secondary_color get added to
 # FashionItem or passed in as a separate color lookup dict: {item_id: (dominant, secondary)}
@@ -24,7 +26,6 @@ def compute(outfit: dict[str, FashionItem]) -> float:
 
 
 def _color_harmony(items: list[FashionItem]) -> float:
-    # TODO: replace COLOR_LOOKUP with however teammates expose color data
     colors = [
         COLOR_LOOKUP[item.item_id]
         for item in items
@@ -34,10 +35,32 @@ def _color_harmony(items: list[FashionItem]) -> float:
 
 
 def _usage_coherence(items: list[FashionItem]) -> float:
-    # TODO: implement — map item.usage → formality score, return std deviation
-    pass
+    formality = {
+        "Formal": 1.0,
+        "Smart Casual": 0.8,
+        "Ethnic": 0.7,
+        "Casual": 0.5,
+        "Travel": 0.3,
+        "Home": 0.2,
+        "Sports": 0.1,
+    }
+    scores = [formality[item.usage] for item in items if item.usage in formality]
+    if len(scores) < 2:
+        return 0.0
+    return float(np.std(scores))
 
 
 def _season_coherence(items: list[FashionItem]) -> float:
-    # TODO: implement — map item.season → angle, return circular variance
-    pass
+    angles = {
+        "Spring": 0.0,
+        "Summer": 90.0,
+        "Fall": 180.0,
+        "Winter": 270.0,
+    }
+    radians = [math.radians(angles[item.season]) for item in items if item.season in angles]
+    if len(radians) < 2:
+        return 0.0
+    sin_mean = float(np.mean([math.sin(r) for r in radians]))
+    cos_mean = float(np.mean([math.cos(r) for r in radians]))
+    r = math.sqrt(sin_mean**2 + cos_mean**2)
+    return 1.0 - r  # circular variance: 0 = all same season, 1 = maximally spread
