@@ -6,8 +6,8 @@ from src.embeddings.data_encoder import DataEncoder
 
 
 class ItemEmbedder:
-    def __init__(self, images_dir: str, k: int = 3):
-        self.color_encoder = ColorEncoder(images_dir, k)
+    def __init__(self, images_dir: str, k: int = 3, color_lookup: dict | None = None):
+        self.color_encoder = ColorEncoder(images_dir, k, color_lookup=color_lookup)
         self.data_encoder = DataEncoder()
 
     def embed(self, items: list[FashionItem]) -> np.ndarray:
