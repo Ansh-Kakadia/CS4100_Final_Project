@@ -4,9 +4,13 @@ import numpy as np
 from src.data.item import FashionItem
 from src.optimizer import color_harmony
 
-# TODO: decide with teammates whether dominant_color/secondary_color get added to
-# FashionItem or passed in as a separate color lookup dict: {item_id: (dominant, secondary)}
 COLOR_LOOKUP: dict[int, tuple[list[int], list[int]]] = {}
+
+
+def set_color_lookup(lookup: dict[int, tuple[list[int], list[int]]]) -> None:
+    """Populate the module-level color lookup used by energy scoring."""
+    global COLOR_LOOKUP
+    COLOR_LOOKUP = lookup
 
 
 def compute(outfit: dict[str, FashionItem]) -> float:
