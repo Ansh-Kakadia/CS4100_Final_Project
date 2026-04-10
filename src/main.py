@@ -78,7 +78,7 @@ def run_pipeline(item_id: int):
     )
     print(f"Built initial outfit with {len(initial_outfit)} slots.")
 
-    optimized_outfit, history = run(initial_outfit, finder)
+    optimized_outfit, history = run(initial_outfit, finder, locked_id=anchor_item.item_id)
 
     print("Optimization complete.")
     print("Initial:", {slot: item.item_id for slot, item in initial_outfit.items()})

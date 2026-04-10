@@ -8,8 +8,11 @@ class NeighborFinder:
             self.knn_graph = dict[str, list[str]](json.load(f))
         self._id_to_item = id_to_item
 
-    def get_neighbors(self, outfit: dict[str, FashionItem]) -> dict[str, FashionItem]:
-        slot = random.choice(list(outfit.keys()))
+    def get_neighbors(self, outfit: dict[str, FashionItem], locked_id: int | None = None) -> dict[str, FashionItem]:
+        swappable = [s for s in outfit if outfit[s].item_id != locked_id]
+        if not swappable:
+            return outfit
+        slot = random.choice(swappable)
         current =  outfit[slot]
         
         neighbors = self.knn_graph.get(str(current.item_id), [])

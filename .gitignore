@@ -3,3 +3,4 @@ fashion_items/*
 
 venv/*
 polyvore_dataset/hf_images/*
+**/__pycache__

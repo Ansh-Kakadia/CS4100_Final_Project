@@ -7,6 +7,7 @@ from src.optimizer.neighbor import NeighborFinder
 def run(
     initial_fit: dict[str, FashionItem],
     finder: NeighborFinder,
+    locked_id: int | None = None,
     start: float = 1.0,
     min: float = 0.001,
     cooling: float = 0.995,
@@ -26,7 +27,7 @@ def run(
         if t < min:
             break
         
-        candidate = finder.get_neighbors(current)
+        candidate = finder.get_neighbors(current, locked_id)
         candidate_energy = energy.compute(candidate)
         
         delta = candidate_energy - current_energy
