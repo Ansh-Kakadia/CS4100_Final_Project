@@ -16,13 +16,28 @@ class NeighborFinder:
         if not neighbors:
             return outfit # no neighbors so we keep it the same
         
-        candidate_ids = [
-              int(nid) for nid in neighbors
-              if int(nid) in self._id_to_item
-          ] # random neighbor that exists in our item index
-        if not candidate_ids:
-            return outfit # no candidates so we keep it the same
+        candidate_items = []
+
+        for nid in neighbors:
+            nid_int = int(nid)
+            if nid_int not in self._id_to_item:
+                continue
+
+            candidate = self._id_to_item[nid_int]
+
+            # keep same subcategory
+            if candidate.sub_category != current.sub_category:
+                continue
+
+            # keep same gender
+            if candidate.gender != current.gender:
+                continue
+
+            candidate_items.append(candidate)
         
-        found_item = self._id_to_item[random.choice(candidate_ids)]
+        if not candidate_items:
+            return outfit # no valid replacements, keep the same outfit
+        
+        found_item = random.choice(candidate_items)
         return {**outfit, slot: found_item}
         
