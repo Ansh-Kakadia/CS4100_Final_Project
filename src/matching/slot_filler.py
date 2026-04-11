@@ -58,6 +58,9 @@ def fill_slots(
         polyvore_cat_id: int = slot["polyvore_category_id"]
         kaggle_sub: str = slot["kaggle_subcategory"]
 
+        if kaggle_sub == anchor_item.sub_category:
+            continue
+
         # Find the reference Polyvore item so we can match its color
         reference_color: list[int] | None = None
         for pv_item in polyvore_outfit["items"]:
